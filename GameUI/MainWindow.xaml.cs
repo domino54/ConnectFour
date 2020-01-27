@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameLibrary;
 
 namespace GameUI
 {
@@ -20,6 +21,8 @@ namespace GameUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Game game;
+
         public MainWindow()
         {
             InitializeComponent();
