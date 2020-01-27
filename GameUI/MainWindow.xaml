@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Connect Four" Height="720" Width="1280" Visibility="Visible" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid x:Name="MainMenu" Panel.ZIndex="1">
+            <Image x:Name="Logo" HorizontalAlignment="Center" Height="153" Margin="329,91,333,447" VerticalAlignment="Center" Width="612" Source="assets/Logo.png" Stretch="Fill"/>
+            <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41"/>
+            <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41"/>
+            <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41"/>
+            <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41"/>
+        </Grid>
+
+        <Image x:Name="Background" HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/Background.jpg" Stretch="Fill"/>
     </Grid>
 </Window>
