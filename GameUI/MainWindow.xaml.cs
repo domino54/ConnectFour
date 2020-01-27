@@ -21,11 +21,22 @@ namespace GameUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        enum ApplicationState
+        {
+            InMainMenu,
+            InHelpMenu,
+            StartingGame,
+            Playing
+        }
+
+        private ApplicationState state;
         private Game game;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            this.state = ApplicationState.InMainMenu;
         }
     }
 }
