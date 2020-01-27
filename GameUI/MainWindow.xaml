@@ -20,7 +20,15 @@
         </Grid>
 
         <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Hidden">
+            <Grid Panel.ZIndex="1">
+                <Image HorizontalAlignment="Center" Height="152" Margin="335,72,335,467" VerticalAlignment="Center" Width="604" Source="assets/Logo.png" Stretch="Fill"/>
+                <Button x:Name="ButtonSize7x6" Content="7 X 6 (KLASYCZNA)" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize7x6_Click"/>
+                <Button x:Name="ButtonSize8x7" Content="8 X 7 (POWIĘKSZONA)" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize8x7_Click"/>
+                <Button x:Name="ButtonSize10x8" Content="10 x 8 (MEGA)" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize10x8_Click"/>
+                <Button x:Name="StartingGameMenuReturn" Content="MENU GŁÓWNE" HorizontalAlignment="Center" Margin="454,566,450,84" VerticalAlignment="Center" Width="370" Height="41" Click="StartingGameMenuReturn_Click"/>
+            </Grid>
 
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
         </Grid>
 
         <Grid x:Name="HowToPlayMenu" Panel.ZIndex="1" Visibility="Hidden">
@@ -33,8 +41,11 @@
             <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
         </Grid>
 
-        <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Visible">
+            <Grid x:Name="BoardFrame" Margin="219,107,210,78">
+                
 
+            </Grid>
         </Grid>
 
         <Image x:Name="Background" HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/Background.jpg" Stretch="Fill"/>

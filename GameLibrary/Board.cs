@@ -64,7 +64,27 @@ namespace GameLibrary
             this.winnerNum = this.FindWinner();
             this.nextPlayerMove = this.winnerNum > 0 ? 0 : 3 - this.nextPlayerMove;
         }
-        
+
+        public int NbColumns
+        {
+            get => this.nbColumns;
+        }
+
+        public int NbRows
+        {
+            get => this.nbRows;
+        }
+
+        public int NextPlayer
+        {
+            get => this.nextPlayerMove;
+        }
+
+        public int Winner
+        {
+            get => this.winnerNum;
+        }
+
         public int[] ColumnsWithEmptyRows
         {
             get
@@ -81,11 +101,6 @@ namespace GameLibrary
 
                 return columnNums.ToArray();
             }
-        }
-
-        public int NextPlayer
-        {
-            get => this.nextPlayerMove;
         }
 
         public int[,] Layout
