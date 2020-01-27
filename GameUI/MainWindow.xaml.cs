@@ -58,10 +58,20 @@ namespace GameUI
 
             this.SetState(ApplicationState.StartingGame);
         }
+        
+        private void ButtonHowToPlay_Click(object sender, RoutedEventArgs e)
+        {
+            this.SetState(ApplicationState.InHelpMenu);
+        }
 
         private void ButtonQuit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void HelpMenuReturn_Click(object sender, RoutedEventArgs e)
+        {
+            this.SetState(ApplicationState.InMainMenu);
         }
     }
 }

@@ -7,23 +7,33 @@
         mc:Ignorable="d"
         Title="Connect Four" Height="720" Width="1280" Visibility="Visible" ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="MainMenu" Panel.ZIndex="1">
-            <Image x:Name="Logo" HorizontalAlignment="Center" Height="153" Margin="329,91,333,447" VerticalAlignment="Center" Width="612" Source="assets/Logo.png" Stretch="Fill"/>
-            <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41"/>
-            <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click"/>
-            <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41"/>
-            <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click"/>
+        <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Visible">
+            <Grid Panel.ZIndex="1">
+                <Image x:Name="MainMenuLogo" HorizontalAlignment="Center" Height="153" Margin="329,91,333,447" VerticalAlignment="Center" Width="612" Source="assets/Logo.png" Stretch="Fill"/>
+                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41"/>
+                <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click"/>
+                <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click"/>
+                <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click"/>
+            </Grid>
+
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
         </Grid>
 
-        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1">
+        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Hidden">
 
         </Grid>
 
-        <Grid x:Name="HowToPlayMenu" Panel.ZIndex="1">
+        <Grid x:Name="HowToPlayMenu" Panel.ZIndex="1" Visibility="Hidden">
+            <Grid Panel.ZIndex="1">
+                <Image HorizontalAlignment="Center" Height="152" Margin="335,72,335,467" VerticalAlignment="Center" Width="604" Source="assets/Logo.png" Stretch="Fill"/>
+                <TextBlock HorizontalAlignment="Left" Margin="335,278,0,0" TextWrapping="Wrap" FontSize="16" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają do wybranej kolumny stojaka krążek swojego koloru, który wyląduje na szczycie stosu. Grę wygrywa ten kto pierwszy ułoży w jednej linii poziomo, pionowo, bądź na ukos 4 krążki swojego koloru." VerticalAlignment="Top" Width="604" Height="210" Foreground="White"/>
+                <Button x:Name="HelpMenuReturn" Content="MENU GŁÓWNE" HorizontalAlignment="Center" Margin="454,566,450,84" VerticalAlignment="Center" Width="370" Height="41" Click="HelpMenuReturn_Click"/>
+            </Grid>
 
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
         </Grid>
 
-        <Grid x:Name="GameBoardMenu" Panel.ZIndex="1">
+        <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Hidden">
 
         </Grid>
 
