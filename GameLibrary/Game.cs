@@ -57,14 +57,14 @@ namespace GameLibrary
             this.currentBoard = new Board(columns, rows);
         }
 
-        public void AddCoin(int col, int row, int player)
+        public void AddCoin(int col, int player)
         {
             if (this.currentBoard == null)
             {
                 throw new Exception();
             }
 
-            this.currentBoard.AddCoin(col, row, player);
+            this.currentBoard.AddCoin(col, player);
         }
 
         public void StopGame()

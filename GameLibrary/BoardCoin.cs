@@ -8,8 +8,7 @@ namespace GameLibrary
 {
     class BoardCoin
     {
-        private int playerNum;
-        private bool isVictory;
+        public int Player { get; }
 
         public BoardCoin(int player)
         {
@@ -18,17 +17,7 @@ namespace GameLibrary
                 throw new Exception();
             }
 
-            this.playerNum = player;
-        }
-
-        public int Player
-        {
-            get => this.playerNum;
-        }
-        
-        public void MarkAsVictory()
-        {
-            this.isVictory = true;
+            this.Player = player;
         }
     }
 }

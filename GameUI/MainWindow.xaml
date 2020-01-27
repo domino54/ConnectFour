@@ -42,10 +42,7 @@
         </Grid>
 
         <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Visible">
-            <Grid x:Name="BoardFrame" Margin="219,107,210,78">
-                
-
-            </Grid>
+            <Grid x:Name="BoardFrame" Margin="0,0,0,64"/>
         </Grid>
 
         <Image x:Name="Background" HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/Background.jpg" Stretch="Fill"/>

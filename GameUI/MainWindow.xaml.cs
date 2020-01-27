@@ -21,6 +21,8 @@ namespace GameUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const int GRID_SIZE = 60;
+
         enum ApplicationState
         {
             InMainMenu,
@@ -32,6 +34,8 @@ namespace GameUI
         private ApplicationState state;
         private Game game;
         private ImageSource gridEmptyTexture = new BitmapImage(new Uri(@"/assets/GridEmpty.png", UriKind.Relative));
+        private ImageSource gridRedTexture = new BitmapImage(new Uri(@"/assets/GridRed.png", UriKind.Relative));
+        private ImageSource gridYellowTexture = new BitmapImage(new Uri(@"/assets/GridYellow.png", UriKind.Relative));
 
         public MainWindow()
         {
@@ -75,25 +79,63 @@ namespace GameUI
             BoardFrame.Children.Clear();
 
             int[,] layout = this.game.CurrentBoard.Layout;
+            int[] unfilledColumns = this.game.CurrentBoard.ColumnsWithEmptyRows;
             int nbColumns = layout.GetLength(0);
             int nbRows = layout.GetLength(1);
-            
+
+            Thickness newMargin = BoardFrame.Margin;
+            newMargin.Left = (1280 - nbColumns * GRID_SIZE) / 2;
+            BoardFrame.Margin = newMargin;
+
             for (int col = 0; col < nbColumns; col++)
             {
                 Grid columnGrid = new Grid();
                 BoardFrame.Children.Add(columnGrid);
 
-                columnGrid.Margin = new Thickness(col * 100, 0, 0, 0);
-
+                columnGrid.Margin = new Thickness(col * GRID_SIZE, 0, 0, 0);
+                
                 for (int row = 0; row < nbRows; row++)
                 {
-                    Image rowImage = new Image();
+                    Image rowGridImage = new Image();
+                    columnGrid.Children.Add(rowGridImage);
+                    
+                    switch (layout[col, row])
+                    {
+                        case 1:
+                            {
+                                rowGridImage.Source = gridYellowTexture;
+                                break;
+                            }
+                        case 2:
+                            {
+                                rowGridImage.Source = gridRedTexture;
+                                break;
+                            }
+                        default:
+                            {
+                                rowGridImage.Source = gridEmptyTexture;
+                                break;
+                            }
+                    }
 
-                    rowImage.Source = gridEmptyTexture;
-                    rowImage.Margin = new Thickness(0, row * 100, 0, 0);
-                    rowImage.Width = rowImage.Height = 50;
+                    rowGridImage.Margin = new Thickness(0, 0, 0, row * GRID_SIZE);
+                    rowGridImage.Width = rowGridImage.Height = GRID_SIZE;
+                    rowGridImage.HorizontalAlignment = HorizontalAlignment.Left;
+                    rowGridImage.VerticalAlignment = VerticalAlignment.Bottom;
+                }
 
-                    columnGrid.Children.Add(rowImage);
+                if (unfilledColumns.Contains(col))
+                {
+                    Button addCoinButton = new Button();
+                    columnGrid.Children.Add(addCoinButton);
+
+                    addCoinButton.Margin = new Thickness(10, 0, 0, (nbColumns - 1) * GRID_SIZE + 10);
+                    addCoinButton.Width = addCoinButton.Height = GRID_SIZE - 20;
+                    addCoinButton.HorizontalAlignment = HorizontalAlignment.Left;
+                    addCoinButton.VerticalAlignment = VerticalAlignment.Bottom;
+                    addCoinButton.Name = "AddCoinButton_" + col;
+
+                    addCoinButton.Click += ButtonAddCoin_Click;
                 }
             }
         }
@@ -138,6 +180,19 @@ namespace GameUI
         private void ButtonSize10x8_Click(object sender, RoutedEventArgs e)
         {
             StartNewGame(Game.BoardSizes.Size10x8);
+        }
+
+        private void ButtonAddCoin_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            string[] explode = button.Name.Split('_');
+
+            if (explode.Length != 2) return;
+
+            int col = Int32.Parse(explode[1]);
+
+            this.game.CurrentBoard.AddCoin(col, this.game.CurrentBoard.NextPlayer);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GameLibrary
     class BoardColumn
     {
         private List<BoardCoin> filledRows = new List<BoardCoin>();
-        private int maxNbRows;
+        public int NbRows { get; }
 
         public BoardColumn(int rows)
         {
@@ -18,14 +18,9 @@ namespace GameLibrary
                 throw new Exception();
             }
             
-            this.maxNbRows = rows;
+            this.NbRows = rows;
         }
-
-        public int NbRows
-        {
-            get => this.maxNbRows;
-        }
-
+        
         public bool HasEmptyRows
         {
             get => this.filledRows.Count < this.NbRows;
@@ -51,9 +46,9 @@ namespace GameLibrary
         public int[] Layout
         {
             get {
-                int[] rowsPlayers = new int[maxNbRows];
+                int[] rowsPlayers = new int[this.NbRows];
 
-                for (int i = 0; i < this.maxNbRows; i++)
+                for (int i = 0; i < this.NbRows; i++)
                 {
                     if (i < this.filledRows.Count) {
                         rowsPlayers[i] = this.filledRows[i].Player;

@@ -41,25 +41,25 @@ namespace GameLibrary
             return 0; // todo
         }
 
-        public void AddCoin(int col, int row, int player)
+        public void AddCoin(int col, int player)
         {
             if (player <= 0 || player > 2)
             {
                 throw new Exception();
             }
 
-            if (columns.ElementAt(col) != null)
+            if (columns.ElementAt(col) == null)
             {
                 throw new Exception();
             }
 
             BoardColumn column = columns[col];
 
-            if (row < 0 || row >= column.NbRows)
+            if (!column.HasEmptyRows)
             {
                 throw new Exception();
             }
-
+            
             column.AddCoin(player);
             this.winnerNum = this.FindWinner();
             this.nextPlayerMove = this.winnerNum > 0 ? 0 : 3 - this.nextPlayerMove;
