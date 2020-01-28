@@ -9,20 +9,20 @@
     <Grid>
         <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Hidden">
             <Grid Panel.ZIndex="1">
-                <Image x:Name="MainMenuLogo" HorizontalAlignment="Center" Height="153" Margin="329,91,333,447" VerticalAlignment="Center" Width="612" Source="assets/Logo.png" Stretch="Fill"/>
-                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41" BorderThickness="0" FontSize="18"/>
-                <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click" BorderThickness="0" FontSize="18"/>
-                <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click" BorderThickness="0" FontSize="18"/>
-                <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click" BorderThickness="0" FontSize="18"/>
+                <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
+                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="452,285,452,365" VerticalAlignment="Center" Width="370" Height="41" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="452,331,452,319" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="452,377,452,273" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click" BorderThickness="0" FontSize="18"/>
             </Grid>
 
             <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
         </Grid>
 
-        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Visible">
+        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Hidden">
             <Grid Panel.ZIndex="1">
                 <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
-                <Label Margin="526,269,524,345" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="77">Wybierz rozmiar planszy</Label>
+                <Label Margin="337,277,337,356" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="58" Width="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Wybierz rozmiar planszy</Label>
 
                 <Button x:Name="ButtonSize7x6" HorizontalAlignment="Center" Margin="384,351,733,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize7x6_Click" BorderThickness="0">
                     <Grid>
@@ -60,7 +60,14 @@
         </Grid>
 
         <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Visible">
-            <Grid x:Name="BoardFrame" Margin="0,0,0,64"/>
+            <Grid Panel.ZIndex="1">
+                <Label x:Name="GameStatusText" Margin="20,0,0,619" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Left" Height="72" Width="789" VerticalContentAlignment="Center">Następny ruch:</Label>
+                <Button x:Name="GameBoardReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="1137,16,17,634" VerticalAlignment="Center" Width="120" Height="41" Click="GameBoardReturn_Click" BorderThickness="0" FontSize="18"/>
+            </Grid>
+
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="1274" Height="75"/>
+
+            <Grid x:Name="BoardFrame" Margin="0,0,0,64" Panel.ZIndex="1"/>
         </Grid>
 
         <Image x:Name="Background" HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/Background.jpg" Stretch="Fill"/>
