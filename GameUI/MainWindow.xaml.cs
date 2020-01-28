@@ -33,9 +33,9 @@ namespace GameUI
 
         private ApplicationState state;
         private Game game;
-        private ImageSource gridEmptyTexture = new BitmapImage(new Uri(@"/assets/GridEmpty.png", UriKind.Relative));
-        private ImageSource gridRedTexture = new BitmapImage(new Uri(@"/assets/GridRed.png", UriKind.Relative));
-        private ImageSource gridYellowTexture = new BitmapImage(new Uri(@"/assets/GridYellow.png", UriKind.Relative));
+        private ImageSource gridEmptyTexture    = new BitmapImage(new Uri(@"/assets/GridTexture0.png", UriKind.Relative));
+        private ImageSource gridRedTexture      = new BitmapImage(new Uri(@"/assets/GridTexture1.png", UriKind.Relative));
+        private ImageSource gridYellowTexture   = new BitmapImage(new Uri(@"/assets/GridTexture2.png", UriKind.Relative));
 
         public MainWindow()
         {
@@ -192,7 +192,18 @@ namespace GameUI
 
             int col = Int32.Parse(explode[1]);
 
-            this.game.CurrentBoard.AddCoin(col, this.game.CurrentBoard.NextPlayer);
+            try
+            {
+                this.game.CurrentBoard.AddCoin(col, this.game.CurrentBoard.NextPlayer);
+            }
+            catch (Exception exception)
+            {
+
+            }
+            finally
+            {
+                this.DrawBoard();
+            }
         }
     }
 }

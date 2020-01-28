@@ -7,38 +7,56 @@
         mc:Ignorable="d"
         Title="Connect Four" Height="720" Width="1280" Visibility="Visible" ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Visible">
+        <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Hidden">
             <Grid Panel.ZIndex="1">
                 <Image x:Name="MainMenuLogo" HorizontalAlignment="Center" Height="153" Margin="329,91,333,447" VerticalAlignment="Center" Width="612" Source="assets/Logo.png" Stretch="Fill"/>
-                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41"/>
-                <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click"/>
-                <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click"/>
-                <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click"/>
+                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="453,323,451,327" VerticalAlignment="Center" Width="370" Height="41" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click" BorderThickness="0" FontSize="18"/>
             </Grid>
 
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
         </Grid>
 
-        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Visible">
             <Grid Panel.ZIndex="1">
-                <Image HorizontalAlignment="Center" Height="152" Margin="335,72,335,467" VerticalAlignment="Center" Width="604" Source="assets/Logo.png" Stretch="Fill"/>
-                <Button x:Name="ButtonSize7x6" Content="7 X 6 (KLASYCZNA)" HorizontalAlignment="Center" Margin="453,369,451,281" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize7x6_Click"/>
-                <Button x:Name="ButtonSize8x7" Content="8 X 7 (POWIĘKSZONA)" HorizontalAlignment="Center" Margin="453,415,451,235" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize8x7_Click"/>
-                <Button x:Name="ButtonSize10x8" Content="10 x 8 (MEGA)" HorizontalAlignment="Center" Margin="453,461,451,189" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonSize10x8_Click"/>
-                <Button x:Name="StartingGameMenuReturn" Content="MENU GŁÓWNE" HorizontalAlignment="Center" Margin="454,566,450,84" VerticalAlignment="Center" Width="370" Height="41" Click="StartingGameMenuReturn_Click"/>
+                <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
+                <Label Margin="526,269,524,345" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="77">Wybierz rozmiar planszy</Label>
+
+                <Button x:Name="ButtonSize7x6" HorizontalAlignment="Center" Margin="384,351,733,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize7x6_Click" BorderThickness="0">
+                    <Grid>
+                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">7 x 6</Label>
+                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">KLASYCZNA</Label>
+                    </Grid>
+                </Button>
+                <Button x:Name="ButtonSize8x7" HorizontalAlignment="Center" Margin="559,351,558,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize8x7_Click" BorderThickness="0">
+                    <Grid>
+                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">8 x 7</Label>
+                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">DUŻA</Label>
+                    </Grid>
+                </Button>
+                <Button x:Name="ButtonSize10x8" HorizontalAlignment="Center" Margin="733,351,384,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize10x8_Click" BorderThickness="0">
+                    <Grid>
+                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">10 x 8</Label>
+                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">MEGA</Label>
+                    </Grid>
+                </Button>
+
+                <Button x:Name="StartingGameMenuReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="StartingGameMenuReturn_Click" BorderThickness="0" FontSize="18"/>
             </Grid>
 
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
         </Grid>
 
         <Grid x:Name="HowToPlayMenu" Panel.ZIndex="1" Visibility="Hidden">
             <Grid Panel.ZIndex="1">
-                <Image HorizontalAlignment="Center" Height="152" Margin="335,72,335,467" VerticalAlignment="Center" Width="604" Source="assets/Logo.png" Stretch="Fill"/>
-                <TextBlock HorizontalAlignment="Left" Margin="335,278,0,0" TextWrapping="Wrap" FontSize="16" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają do wybranej kolumny stojaka krążek swojego koloru, który wyląduje na szczycie stosu. Grę wygrywa ten kto pierwszy ułoży w jednej linii poziomo, pionowo, bądź na ukos 4 krążki swojego koloru." VerticalAlignment="Top" Width="604" Height="210" Foreground="White"/>
-                <Button x:Name="HelpMenuReturn" Content="MENU GŁÓWNE" HorizontalAlignment="Center" Margin="454,566,450,84" VerticalAlignment="Center" Width="370" Height="41" Click="HelpMenuReturn_Click"/>
+                <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
+                <TextBlock HorizontalAlignment="Left" Margin="335,206,0,0" TextWrapping="Wrap" FontSize="20" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają do wybranej kolumny stojaka krążek swojego koloru, który wyląduje na szczycie stosu. Grę wygrywa ten kto pierwszy ułoży w jednej linii poziomo, pionowo, bądź na ukos 4 krążki swojego koloru." VerticalAlignment="Top" Width="604" Height="359" Foreground="White"/>
+                <Button x:Name="HelpMenuReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="HelpMenuReturn_Click" BorderThickness="0" FontSize="18"/>
             </Grid>
 
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
         </Grid>
 
         <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Visible">

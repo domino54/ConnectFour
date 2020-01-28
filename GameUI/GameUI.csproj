@@ -108,7 +108,13 @@
     <Resource Include="assets\MainMenuBg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="assets\GridEmpty.png" />
+    <Resource Include="assets\GridTexture0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\GridTexture1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\GridTexture2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
