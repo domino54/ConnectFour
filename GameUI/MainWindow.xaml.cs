@@ -56,7 +56,7 @@ namespace GameUI
             HowToPlayMenu.Visibility    = this.state == ApplicationState.InHelpMenu     ? Visibility.Visible : Visibility.Hidden;
             StartingGameMenu.Visibility = this.state == ApplicationState.StartingGame   ? Visibility.Visible : Visibility.Hidden;
             GameBoardMenu.Visibility    = this.state == ApplicationState.Playing        ? Visibility.Visible : Visibility.Hidden;
-            ButtonResume.Visibility     = this.game.CurrentBoard != null                ? Visibility.Visible : Visibility.Hidden;
+            ButtonResume.IsEnabled      = this.game.CurrentBoard != null;
         }
 
         private void StartNewGame(Game.BoardSizes size)

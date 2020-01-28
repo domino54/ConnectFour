@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:GameUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+        <ResourceDictionary Source="GameAssets.xaml" />
     </Application.Resources>
 </Application>
