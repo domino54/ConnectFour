@@ -89,20 +89,15 @@ namespace GameUI
             int[] unfilledColumns = this.game.CurrentBoard.ColumnsWithEmptyRows;
             int nbColumns = layout.GetLength(0);
             int nbRows = layout.GetLength(1);
-
-            int nextPlayer = this.game.CurrentBoard.NextPlayer;
-            int winner = this.game.CurrentBoard.Winner;
-            int displayedPlayer = winner > 0 ? winner : nextPlayer;
+            
+            int displayedPlayer = this.game.CurrentBoard.Winner > 0 ? this.game.CurrentBoard.Winner : this.game.CurrentBoard.NextPlayer;
             string displayedPlayerName = displayedPlayer == 1 ? "CZERWONY" : "ŻÓŁTY";
-
-            bool noEmptySpots = unfilledColumns.Length <= 0;
-            bool gameFinished = noEmptySpots || winner > 0;
-
-            if (noEmptySpots)
+            
+            if (!this.game.CurrentBoard.HasEmptyVolumns)
             {
                 GameStatusText.Content = "Koniec gry - brak wolnych pól!";
             }
-            else if (winner > 0)
+            else if (this.game.CurrentBoard.Winner > 0)
             {
                 GameStatusText.Content = "Gracz " + displayedPlayerName + " wygrywa grę!";
             }
@@ -152,7 +147,7 @@ namespace GameUI
                     rowGridImage.VerticalAlignment = VerticalAlignment.Bottom;
                 }
 
-                if (!gameFinished && unfilledColumns.Contains(col))
+                if (!this.game.CurrentBoard.IsFinished && unfilledColumns.Contains(col))
                 {
                     Button addCoinButton = new Button();
                     columnGrid.Children.Add(addCoinButton);
@@ -246,7 +241,7 @@ namespace GameUI
 
         private void GameBoardReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (this.game.CurrentBoard != null && this.game.CurrentBoard.Winner > 0)
+            if (this.game.CurrentBoard != null && this.game.CurrentBoard.IsFinished)
             {
                 this.game.StopGame();
             }

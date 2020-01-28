@@ -103,6 +103,16 @@ namespace GameLibrary
             }
         }
 
+        public bool HasEmptyVolumns
+        {
+            get => this.ColumnsWithEmptyRows.Length > 0;
+        }
+
+        public bool IsFinished
+        {
+            get => this.Winner > 0 || !this.HasEmptyVolumns;
+        }
+
         public int[,] Layout
         {
             get

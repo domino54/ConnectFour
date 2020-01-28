@@ -10,7 +10,7 @@
         <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Hidden">
             <Grid Panel.ZIndex="1">
                 <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
-                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="452,285,452,365" VerticalAlignment="Center" Width="370" Height="41" BorderThickness="0" FontSize="18"/>
+                <Button x:Name="ButtonResume" Content="WZNÓW GRĘ" HorizontalAlignment="Center" Margin="452,285,452,365" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonResume_Click" BorderThickness="0" FontSize="18"/>
                 <Button x:Name="ButtonNewGame" Content="NOWA GRA" HorizontalAlignment="Center" Margin="452,331,452,319" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonNewGame_Click" BorderThickness="0" FontSize="18"/>
                 <Button x:Name="ButtonHowToPlay" Content="JAK GRAĆ?" HorizontalAlignment="Center" Margin="452,377,452,273" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonHowToPlay_Click" BorderThickness="0" FontSize="18"/>
                 <Button x:Name="ButtonQuit" Content="WYJDŹ Z GRY" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="ButtonQuit_Click" BorderThickness="0" FontSize="18"/>
