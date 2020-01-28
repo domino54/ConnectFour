@@ -91,6 +91,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="assets\Weatpoint.otf" />
+    <Resource Include="assets\KGPrimaryItalics.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +132,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\ButtonDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\ButtonSizeNormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\BoardSize10x8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\BoardSize7x6.png" />
+    <Resource Include="assets\BoardSize8x7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\ButtonSizeFocused.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

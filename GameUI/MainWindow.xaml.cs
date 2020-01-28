@@ -200,17 +200,17 @@ namespace GameUI
             this.SetState(ApplicationState.InMainMenu);
         }
 
-        private void ButtonSize7x6_Click(object sender, RoutedEventArgs e)
+        private void Button_StartGame7x6(object sender, RoutedEventArgs e)
         {
             StartNewGame(Game.BoardSizes.Size7x6);
         }
 
-        private void ButtonSize8x7_Click(object sender, RoutedEventArgs e)
+        private void Button_StartGame8x7(object sender, RoutedEventArgs e)
         {
             StartNewGame(Game.BoardSizes.Size8x7);
         }
 
-        private void ButtonSize10x8_Click(object sender, RoutedEventArgs e)
+        private void Button_StartGame10x8(object sender, RoutedEventArgs e)
         {
             StartNewGame(Game.BoardSizes.Size10x8);
         }
@@ -239,7 +239,7 @@ namespace GameUI
             }
         }
 
-        private void GameBoardReturn_Click(object sender, RoutedEventArgs e)
+        private void Button_ReturnToMenu(object sender, RoutedEventArgs e)
         {
             if (this.game.CurrentBoard != null && this.game.CurrentBoard.IsFinished)
             {

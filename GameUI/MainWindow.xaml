@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameUI"
         mc:Ignorable="d"
-        Title="Connect Four" Height="720" Width="1280" Visibility="Visible">
+        Title="Connect Four" Height="720" Width="1280" MinHeight="720" MinWidth="760">
     <Window.Resources>
-        <Style TargetType="{x:Type Button}">
+        <Style x:Key="Copyright" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="assets/#KG Primary Italics"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#AAA"/>
+        </Style>
+
+        <Style x:Key="TitleLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="Foreground" Value="#247"/>
+        </Style>
+
+        <Style x:Key="Description" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="assets/#KG Primary Italics"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="#247"/>
+        </Style>
+
+        <Style x:Key="HighlighterButton" TargetType="{x:Type Button}">
             <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
             <Setter Property="FontSize" Value="38"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -16,7 +34,7 @@
             <Setter Property="Foreground" Value="#247"/>
             <Setter Property="Background">
                 <Setter.Value>
-                    <ImageBrush ImageSource="./assets/ButtonEnabled.png" />
+                    <ImageBrush ImageSource="assets/ButtonEnabled.png" />
                 </Setter.Value>
             </Setter>
             <Setter Property="Template">
@@ -32,7 +50,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <ImageBrush ImageSource="./assets/ButtonFocused.png" />
+                            <ImageBrush ImageSource="assets/ButtonFocused.png" />
                         </Setter.Value>
                     </Setter>
                 </Trigger>
@@ -40,92 +58,168 @@
                     <Setter Property="Foreground" Value="#999"/>
                     <Setter Property="Background">
                         <Setter.Value>
-                            <ImageBrush ImageSource="./assets/ButtonDisabled.png" />
+                            <ImageBrush ImageSource="assets/ButtonDisabled.png" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BoardSizeButton" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="160"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="assets/ButtonSizeNormal.png" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="assets/ButtonSizeFocused.png" />
                         </Setter.Value>
                     </Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="./assets/Background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="assets/Background.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Grid x:Name="MainMenu" Panel.ZIndex="1" Visibility="Visible" HorizontalAlignment="Center" Width="760">
+        <Grid HorizontalAlignment="Center" Width="760">
             <Grid.Background>
-                <ImageBrush ImageSource="./assets/NotebookPaper.png" TileMode="FlipY" Viewport="0,0,760,1397" Stretch="UniformToFill" ViewportUnits="Absolute"/>
+                <ImageBrush ImageSource="assets/NotebookPaper.png" TileMode="FlipY" Viewport="0,0,760,1397" Stretch="UniformToFill" ViewportUnits="Absolute"/>
             </Grid.Background>
-            
-            <Image HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Source="assets/Logo.png" Stretch="Fill" Width="600" Height="150" Panel.ZIndex="1"/>
-            <Grid Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
 
-                <Button x:Name="ButtonResume" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonResume_Click" Margin="0,0,0,8" Grid.Column="0" Grid.Row="0" IsEnabled="False">Wznów grę</Button>
-                <Button x:Name="ButtonNewGame" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonNewGame_Click" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">Nowa gra</Button>
-                <Button x:Name="ButtonHowToPlay" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonHowToPlay_Click" Grid.Column="0" Grid.Row="2">Zasady rozgrywki</Button>
+            <Image HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Source="assets/Logo.png" Stretch="Fill" Width="600" Height="150"/>
+            <Label Style="{StaticResource Copyright}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,6">© 2020 Dominik Mrajca</Label>
+
+            <Grid x:Name="MainMenu" Visibility="Hidden">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="ButtonResume" Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonResume_Click" Margin="0,0,0,8" Grid.Column="0" Grid.Row="0" IsEnabled="False">Wznów grę</Button>
+                    <Button x:Name="ButtonNewGame" Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonNewGame_Click" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">Nowa gra</Button>
+                    <Button x:Name="ButtonHowToPlay" Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ButtonHowToPlay_Click" Grid.Column="0" Grid.Row="2">Zasady rozgrywki</Button>
+                </Grid>
+
+                <Button x:Name="ButtonQuit" Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="ButtonQuit_Click">Wyjdź z gry</Button>
             </Grid>
 
-            <Button x:Name="ButtonQuit" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="230,0,230,37" Click="ButtonQuit_Click">Wyjdź z gry</Button>
-        </Grid>
+            <Grid x:Name="StartingGameMenu" Visibility="Hidden">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-        <Grid x:Name="StartingGameMenu" Panel.ZIndex="1" Visibility="Hidden">
-            <Grid Panel.ZIndex="1">
-                <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
-                <Label Margin="337,277,337,356" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" Height="58" Width="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Wybierz rozmiar planszy</Label>
+                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Wybierz rozmiar planszy</Label>
 
-                <Button x:Name="ButtonSize7x6" HorizontalAlignment="Center" Margin="384,351,733,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize7x6_Click" BorderThickness="0">
-                    <Grid>
-                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">7 x 6</Label>
-                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">KLASYCZNA</Label>
-                    </Grid>
-                </Button>
-                <Button x:Name="ButtonSize8x7" HorizontalAlignment="Center" Margin="559,351,558,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize8x7_Click" BorderThickness="0">
-                    <Grid>
-                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">8 x 7</Label>
-                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">DUŻA</Label>
-                    </Grid>
-                </Button>
-                <Button x:Name="ButtonSize10x8" HorizontalAlignment="Center" Margin="733,351,384,257" VerticalAlignment="Center" Width="157" Height="83" Click="ButtonSize10x8_Click" BorderThickness="0">
-                    <Grid>
-                        <Label Margin="26,-13,24,13" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontWeight="Bold">10 x 8</Label>
-                        <Label Margin="13,27,13,-11" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">MEGA</Label>
-                    </Grid>
-                </Button>
+                    <Button Style="{StaticResource BoardSizeButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_StartGame7x6" Grid.Column="0" Grid.Row="1">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                <Button x:Name="StartingGameMenuReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="StartingGameMenuReturn_Click" BorderThickness="0" FontSize="18"/>
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize7x6.png" Margin="0,20,0,0" VerticalAlignment="Center" />
+                            <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">7 x 6</Label>
+                        </Grid>
+                    </Button>
+
+                    <Button Style="{StaticResource BoardSizeButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_StartGame8x7" Grid.Column="1" Grid.Row="1">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize8x7.png" Margin="0,20,0,0" VerticalAlignment="Center" />
+                            <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">8 x 7</Label>
+                        </Grid>
+                    </Button>
+
+                    <Button Style="{StaticResource BoardSizeButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_StartGame10x8" Grid.Column="2" Grid.Row="1">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize10x8.png" Margin="0,20,0,0" VerticalAlignment="Center" />
+                            <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">10 x 8</Label>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <Button Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
             </Grid>
 
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
-        </Grid>
+            <Grid x:Name="HowToPlayMenu" Visibility="Hidden">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="106,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Zasady rozgrywki</Label>
+                    <TextBlock Style="{StaticResource Description}" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają na spód kolumny krążek swojego koloru (czerwony lub niebieski), który wyląduje na szczycie stosu. Wygrywa gracz który pierwszy ułoży 4 krążki swojego koloru w jednej linii poziomo, pionowo, bądź na ukos." />
+                </Grid>
 
-        <Grid x:Name="HowToPlayMenu" Panel.ZIndex="1" Visibility="Hidden">
-            <Grid Panel.ZIndex="1">
-                <Image HorizontalAlignment="Center" Height="150" Margin="337,26,337,515" VerticalAlignment="Center" Width="600" Source="assets/Logo.png" Stretch="Fill"/>
-                <TextBlock HorizontalAlignment="Left" Margin="335,206,0,0" TextWrapping="Wrap" FontSize="20" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają do wybranej kolumny stojaka krążek swojego koloru, który wyląduje na szczycie stosu. Grę wygrywa ten kto pierwszy ułoży w jednej linii poziomo, pionowo, bądź na ukos 4 krążki swojego koloru." VerticalAlignment="Top" Width="604" Height="359" Foreground="White"/>
-                <Button x:Name="HelpMenuReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="452,606,452,44" VerticalAlignment="Center" Width="370" Height="41" Click="HelpMenuReturn_Click" BorderThickness="0" FontSize="18"/>
+                <Button Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
             </Grid>
 
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="634" Margin="320,0,0,0"/>
-        </Grid>
+            <Grid x:Name="GameBoardMenu" Visibility="Visible">
+                <Grid Panel.ZIndex="1">
+                    <Label x:Name="GameStatusText" Margin="20,0,0,619" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Left" Height="72" Width="789" VerticalContentAlignment="Center">Następny ruch:</Label>
+                    <Button x:Name="GameBoardReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="1137,16,17,634" VerticalAlignment="Center" Width="120" Height="41" Click="Button_ReturnToMenu" BorderThickness="0" FontSize="18"/>
+                </Grid>
 
-        <Grid x:Name="GameBoardMenu" Panel.ZIndex="1" Visibility="Hidden">
-            <Grid Panel.ZIndex="1">
-                <Label x:Name="GameStatusText" Margin="20,0,0,619" VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Left" Height="72" Width="789" VerticalContentAlignment="Center">Następny ruch:</Label>
-                <Button x:Name="GameBoardReturn" Content="POWRÓT" HorizontalAlignment="Center" Margin="1137,16,17,634" VerticalAlignment="Center" Width="120" Height="41" Click="GameBoardReturn_Click" BorderThickness="0" FontSize="18"/>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="1274" Height="75"/>
+
+                <Grid x:Name="BoardFrame" Margin="0,0,0,64" Panel.ZIndex="1"/>
+
+                <Button Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
             </Grid>
-
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="assets/MainMenuBg.png" Stretch="Fill" Width="1274" Height="75"/>
-
-            <Grid x:Name="BoardFrame" Margin="0,0,0,64" Panel.ZIndex="1"/>
         </Grid>
     </Grid>
 </Window>
