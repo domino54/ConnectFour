@@ -35,8 +35,9 @@ namespace GameUI
         private ApplicationState state = ApplicationState.Unknown;
         private Game game;
         private ImageSource gridEmptyTexture    = new BitmapImage(new Uri(@"/assets/GridTexture0.png", UriKind.Relative));
-        private ImageSource gridRedTexture      = new BitmapImage(new Uri(@"/assets/GridTexture1.png", UriKind.Relative));
-        private ImageSource gridYellowTexture   = new BitmapImage(new Uri(@"/assets/GridTexture2.png", UriKind.Relative));
+        private ImageSource gridBlueTexture      = new BitmapImage(new Uri(@"/assets/GridTexture1.png", UriKind.Relative));
+        private ImageSource gridRedTexture   = new BitmapImage(new Uri(@"/assets/GridTexture2.png", UriKind.Relative));
+        private Image[,] gridImages;
 
         public MainWindow()
         {
@@ -46,16 +47,21 @@ namespace GameUI
             this.SetState(ApplicationState.InMainMenu);
         }
 
+        private Visibility GetVisibility(bool visible)
+        {
+            return visible ? Visibility.Visible : Visibility.Hidden;
+        }
+
         private void SetState(ApplicationState newState)
         {
             if (this.state == newState) return;
 
             this.state = newState;
-
-            MainMenu.Visibility         = this.state == ApplicationState.InMainMenu     ? Visibility.Visible : Visibility.Hidden;
-            HowToPlayMenu.Visibility    = this.state == ApplicationState.InHelpMenu     ? Visibility.Visible : Visibility.Hidden;
-            StartingGameMenu.Visibility = this.state == ApplicationState.StartingGame   ? Visibility.Visible : Visibility.Hidden;
-            GameBoardMenu.Visibility    = this.state == ApplicationState.Playing        ? Visibility.Visible : Visibility.Hidden;
+            
+            MainMenu.Visibility         = GetVisibility(this.state == ApplicationState.InMainMenu);
+            HowToPlayMenu.Visibility    = GetVisibility(this.state == ApplicationState.InHelpMenu);
+            StartingGameMenu.Visibility = GetVisibility(this.state == ApplicationState.StartingGame);
+            GameBoardMenu.Visibility    = GetVisibility(this.state == ApplicationState.Playing);
             ButtonResume.IsEnabled      = this.game.CurrentBoard != null;
         }
 
@@ -77,10 +83,144 @@ namespace GameUI
             finally
             {
                 this.SetState(ApplicationState.Playing);
-                this.DrawBoard();
+                this.InitGameBoard();
             }
         }
 
+        private void InitGameBoard()
+        {
+            int[,] layout = this.game.CurrentBoard.Layout;
+            int nbColumns = layout.GetLength(0);
+            int nbRows = layout.GetLength(1);
+
+            this.gridImages = new Image[nbColumns, nbRows];
+
+            GameBoardGrid.Children.Clear();
+            GameBoardGrid.ColumnDefinitions.Clear();
+            GameBoardGrid.RowDefinitions.Clear();
+            GameBoardGrid.RowDefinitions.Add(new RowDefinition());
+
+            for (int col = 0; col < nbColumns; col++)
+            {
+                ColumnDefinition gridCol = new ColumnDefinition();
+                GameBoardGrid.ColumnDefinitions.Add(gridCol);
+
+                Button button = new Button();
+                Grid.SetRow(button, 0);
+                Grid.SetColumn(button, col);
+                GameBoardGrid.Children.Add(button);
+
+                button.Name = "Button_AddCoin_" + col;
+                button.Click += Button_AddCoin;
+                button.Style = this.FindResource("GameBoardColumn") as Style;
+
+                Grid buttonGrid = new Grid();
+                buttonGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                button.Content = buttonGrid;
+                
+                for (int row = 0; row <= nbRows; row++)
+                {
+                    RowDefinition buttonRow = new RowDefinition();
+                    buttonGrid.RowDefinitions.Add(buttonRow);
+
+                    if (row == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        Image rowImage = new Image();
+                        Grid.SetRow(rowImage, row);
+                        Grid.SetColumn(rowImage, 0);
+                        buttonGrid.Children.Add(rowImage);
+                        
+                        int orderInLayout = nbRows - row;
+                        this.gridImages[col, orderInLayout] = rowImage;
+                    }
+                }
+            }
+
+            this.DrawBoard();
+        }
+
+        private void DrawBoard()
+        {
+            int nbColumns = this.gridImages.GetLength(0);
+            int nbRows = this.gridImages.GetLength(1);
+
+            int[,] layout = this.game.CurrentBoard.Layout;
+            int[] unfilledColumns = this.game.CurrentBoard.ColumnsWithEmptyRows;
+
+            NextMoveContainer.Visibility = this.GetVisibility(!this.game.CurrentBoard.IsFinished);
+            WinnerAnnouncement.Visibility = this.GetVisibility(this.game.CurrentBoard.IsFinished);
+
+            if (!this.game.CurrentBoard.IsFinished)
+            {
+                switch (this.game.CurrentBoard.NextPlayer)
+                {
+                    case 1:
+                        {
+                            NextMoveColor.Source = gridRedTexture;
+                            break;
+                        }
+                    case 2:
+                        {
+                            NextMoveColor.Source = gridBlueTexture;
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                switch (this.game.CurrentBoard.Winner)
+                {
+                    case 1:
+                        {
+                            WinnerAnnouncement.Content = "Wygrywa gracz " + "CZERWONY" + "!";
+                            break;
+                        }
+                    case 2:
+                        {
+                            WinnerAnnouncement.Content = "Wygrywa gracz " + "NIEBIESKI" + "!";
+                            break;
+                        }
+                    default:
+                        {
+                            WinnerAnnouncement.Content = "Gra zakończyła się remisem...";
+                            break;
+                        }
+                }
+            }
+
+            for (int col = 0; col < nbColumns; col++)
+            {
+                for (int row = 0; row < nbRows; row++)
+                {
+                    Image cellImage = this.gridImages[col, row];
+
+                    switch (layout[col, row])
+                    {
+                        case 1:
+                            {
+                                cellImage.Source = gridRedTexture;
+                                break;
+                            }
+                        case 2:
+                            {
+                                cellImage.Source = gridBlueTexture;
+                                break;
+                            }
+                        default:
+                            {
+                                cellImage.Source = gridEmptyTexture;
+                                break;
+                            }
+                    }
+                }
+            }
+        }
+        
+        /*
         private void DrawBoard()
         {
             BoardFrame.Children.Clear();
@@ -93,7 +233,7 @@ namespace GameUI
             int displayedPlayer = this.game.CurrentBoard.Winner > 0 ? this.game.CurrentBoard.Winner : this.game.CurrentBoard.NextPlayer;
             string displayedPlayerName = displayedPlayer == 1 ? "CZERWONY" : "ŻÓŁTY";
             
-            if (!this.game.CurrentBoard.HasEmptyVolumns)
+            if (!this.game.CurrentBoard.HasEmptyColumns)
             {
                 GameStatusText.Content = "Koniec gry - brak wolnych pól!";
             }
@@ -126,12 +266,12 @@ namespace GameUI
                     {
                         case 1:
                             {
-                                rowGridImage.Source = gridYellowTexture;
+                                rowGridImage.Source = gridRedTexture;
                                 break;
                             }
                         case 2:
                             {
-                                rowGridImage.Source = gridRedTexture;
+                                rowGridImage.Source = gridBlueTexture;
                                 break;
                             }
                         default:
@@ -164,8 +304,9 @@ namespace GameUI
                 }
             }
         }
+        */
 
-        private void ButtonResume_Click(object sender, RoutedEventArgs e)
+        private void Button_ResumeGame(object sender, RoutedEventArgs e)
         {
             if (this.game.CurrentBoard == null)
             {
@@ -175,31 +316,21 @@ namespace GameUI
             this.SetState(ApplicationState.Playing);
         }
 
-        private void ButtonNewGame_Click(object sender, RoutedEventArgs e)
+        private void Button_NewGame(object sender, RoutedEventArgs e)
         {
             this.SetState(ApplicationState.StartingGame);
         }
         
-        private void ButtonHowToPlay_Click(object sender, RoutedEventArgs e)
+        private void Button_HowToPlay(object sender, RoutedEventArgs e)
         {
             this.SetState(ApplicationState.InHelpMenu);
         }
 
-        private void ButtonQuit_Click(object sender, RoutedEventArgs e)
+        private void Button_CloseGame(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void HelpMenuReturn_Click(object sender, RoutedEventArgs e)
-        {
-            this.SetState(ApplicationState.InMainMenu);
-        }
-
-        private void StartingGameMenuReturn_Click(object sender, RoutedEventArgs e)
-        {
-            this.SetState(ApplicationState.InMainMenu);
-        }
-
+        
         private void Button_StartGame7x6(object sender, RoutedEventArgs e)
         {
             StartNewGame(Game.BoardSizes.Size7x6);
@@ -215,15 +346,15 @@ namespace GameUI
             StartNewGame(Game.BoardSizes.Size10x8);
         }
 
-        private void ButtonAddCoin_Click(object sender, RoutedEventArgs e)
+        private void Button_AddCoin(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
 
             string[] explode = button.Name.Split('_');
+            if (explode.Length != 3) return;
+            int col = Int32.Parse(explode[2]);
 
-            if (explode.Length != 2) return;
-
-            int col = Int32.Parse(explode[1]);
+            if (!this.game.CurrentBoard.ColumnsWithEmptyRows.Contains(col)) return;
 
             try
             {

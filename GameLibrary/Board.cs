@@ -103,14 +103,14 @@ namespace GameLibrary
             }
         }
 
-        public bool HasEmptyVolumns
+        public bool HasEmptyColumns
         {
             get => this.ColumnsWithEmptyRows.Length > 0;
         }
 
         public bool IsFinished
         {
-            get => this.Winner > 0 || !this.HasEmptyVolumns;
+            get => this.Winner > 0 || !this.HasEmptyColumns;
         }
 
         public int[,] Layout
