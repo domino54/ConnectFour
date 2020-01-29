@@ -48,7 +48,7 @@ namespace GameLibrary
         /// </summary>
         /// <param name="coinsArrangement">The arrangement of coins. Must consist of at least 4 elements.</param>
         /// <returns>Identifier of the player that formed a sequence. 0 if no player formed a sequence.</returns>
-        private int MatchingPattern(int[] coinsArrangement)
+        public int MatchingPattern(int[] coinsArrangement)
         {
             if (coinsArrangement.Length < 4)
             {

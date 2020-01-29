@@ -145,5 +145,8 @@
   <ItemGroup>
     <Resource Include="assets\ButtonVerticalFocused.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\SystemBackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

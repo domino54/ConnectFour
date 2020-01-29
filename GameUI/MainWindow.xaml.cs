@@ -86,7 +86,7 @@ namespace GameUI
             }
             catch (Exception exception)
             {
-
+                this.ShowException(exception);
             }
             finally
             {
@@ -284,7 +284,7 @@ namespace GameUI
             }
             catch (Exception exception)
             {
-
+                this.ShowException(exception);
             }
             finally
             {
