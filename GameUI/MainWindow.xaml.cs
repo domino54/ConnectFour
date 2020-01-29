@@ -34,7 +34,7 @@ namespace GameUI
 
         private ApplicationState state = ApplicationState.Unknown;
         private Game game = new Game();
-        private ImageSource gridEmptyTexture, gridRedTexture, gridBlueTexture;
+        private ImageSource gridEmptyTexture, gridBlueTexture, gridRedTexture;
         private Image[,] gridImages;
         private List<Button> columnButtons = new List<Button>();
 
@@ -42,9 +42,9 @@ namespace GameUI
         {
             InitializeComponent();
 
-            this.gridEmptyTexture   = (ImageSource)this.FindResource("GridTexture0");
-            this.gridRedTexture     = (ImageSource)this.FindResource("GridTexture1");
-            this.gridBlueTexture    = (ImageSource)this.FindResource("GridTexture2");
+            this.gridEmptyTexture   = (ImageSource)this.FindResource("GridTextureEmpty");
+            this.gridBlueTexture    = (ImageSource)this.FindResource("GridTextureBlue");
+            this.gridRedTexture     = (ImageSource)this.FindResource("GridTextureRed");
             
             this.SetState(ApplicationState.InMainMenu);
         }
@@ -122,25 +122,18 @@ namespace GameUI
                 buttonGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 button.Content = buttonGrid;
                 
-                for (int row = 0; row <= nbRows; row++)
+                for (int row = 0; row < nbRows; row++)
                 {
                     RowDefinition buttonRow = new RowDefinition();
                     buttonGrid.RowDefinitions.Add(buttonRow);
-
-                    if (row == 0)
-                    {
-
-                    }
-                    else
-                    {
-                        Image rowImage = new Image();
-                        Grid.SetRow(rowImage, row);
-                        Grid.SetColumn(rowImage, 0);
-                        buttonGrid.Children.Add(rowImage);
+                    
+                    Image rowImage = new Image();
+                    Grid.SetRow(rowImage, row);
+                    Grid.SetColumn(rowImage, 0);
+                    buttonGrid.Children.Add(rowImage);
                         
-                        int orderInLayout = nbRows - row;
-                        this.gridImages[col, orderInLayout] = rowImage;
-                    }
+                    int orderInLayout = nbRows - row - 1;
+                    this.gridImages[col, orderInLayout] = rowImage;
                 }
             }
 
@@ -169,12 +162,12 @@ namespace GameUI
                 {
                     case 1:
                         {
-                            NextMoveColor.Source = gridRedTexture;
+                            NextMoveColor.Source = gridBlueTexture;
                             break;
                         }
                     case 2:
                         {
-                            NextMoveColor.Source = gridBlueTexture;
+                            NextMoveColor.Source = gridRedTexture;
                             break;
                         }
                 }
@@ -185,12 +178,12 @@ namespace GameUI
                 {
                     case 1:
                         {
-                            WinnerAnnouncement.Content = "Player " + "RED" + " wins!";
+                            WinnerAnnouncement.Content = "Player " + "BLUE" + " wins!";
                             break;
                         }
                     case 2:
                         {
-                            WinnerAnnouncement.Content = "Player " + "BLUE" + " wins!";
+                            WinnerAnnouncement.Content = "Player " + "RED" + " wins!";
                             break;
                         }
                     default:
@@ -211,12 +204,12 @@ namespace GameUI
                     {
                         case 1:
                             {
-                                cellImage.Source = gridRedTexture;
+                                cellImage.Source = gridBlueTexture;
                                 break;
                             }
                         case 2:
                             {
-                                cellImage.Source = gridBlueTexture;
+                                cellImage.Source = gridRedTexture;
                                 break;
                             }
                         default:

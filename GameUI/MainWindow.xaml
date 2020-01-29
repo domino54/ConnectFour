@@ -112,7 +112,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">How to play</Label>
-                    <TextBlock Style="{StaticResource Description}" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="Connect Four is is a 2 player game. Players take turns in adding coins of their color (red or blue) to different columns, stacking up from the bottom. The first player to place 4 or more coins of the same color horizontally, vertically or diagonally wins." />
+                    <TextBlock Style="{StaticResource Description}" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="Connect Four is a 2 player game. Players take turns in adding coins of their color (blue or red) to different columns, stacking up from the bottom. The first player to place 4 or more coins of the same color horizontally, vertically or diagonally wins." />
                 </Grid>
 
                 <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Return to menu</Button>

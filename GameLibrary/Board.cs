@@ -35,10 +35,97 @@ namespace GameLibrary
                 this.columns.Add(column);
             }
         }
+
+        private int MatchingPattern(int[] series)
+        {
+            if (series.Length < 4)
+            {
+                throw new Exception();
+            }
+
+            int currentStreakIndex = 0;
+            int currentStreakCount = 0;
+
+            for (int i = 0; i < series.Length; i++)
+            {
+                int index = series[i];
+
+                if (currentStreakIndex != index)
+                {
+                    currentStreakIndex = index;
+                    currentStreakCount = 1;
+                }
+                else
+                {
+                    currentStreakCount++;
+                }
+
+                if (currentStreakIndex > 0 && currentStreakCount >= 4) return currentStreakIndex;
+            }
+
+            return 0;
+        }
         
         private int FindWinner()
         {
-            return 0; // todo
+            // Vertically
+            foreach (BoardColumn column in this.columns)
+            {
+                int index = this.MatchingPattern(column.Layout);
+                if (index > 0) return index;
+            }
+
+            int[,] layout = this.Layout;
+
+            // Horizontally
+            for (int row = 0; row < this.nbRows; row++)
+            {
+                int[] rowLayout = new int[this.nbColumns];
+
+                for (int col = 0; col < this.nbColumns; col++)
+                {
+                    rowLayout[col] = layout[col, row];
+                }
+
+                int index = this.MatchingPattern(rowLayout);
+                if (index > 0) return index;
+            }
+
+            // Diagonally - North East
+            for (int col = 0; col <= this.nbColumns - 4; col++)
+            {
+                for (int row = 0; row <= this.nbRows - 4; row++)
+                {
+                    int[] series = new int[4];
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        series[i] = layout[col + i, row + i];
+                    }
+
+                    int index = this.MatchingPattern(series);
+                    if (index > 0) return index;
+                }
+            }
+
+            // Diagonally - South East
+            for (int col = 0; col <= this.nbColumns - 4; col++)
+            {
+                for (int row = this.nbRows - 1; row >= 3; row--)
+                {
+                    int[] series = new int[4];
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        series[i] = layout[col + i, row - i];
+                    }
+
+                    int index = this.MatchingPattern(series);
+                    if (index > 0) return index;
+                }
+            }
+
+            return 0;
         }
 
         public void AddCoin(int col, int player)
