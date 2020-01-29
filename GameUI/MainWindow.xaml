@@ -8,35 +8,31 @@
         Title="Connect Four" Height="720" Width="1280" MinHeight="720" MinWidth="760">
     <Window.Resources>
         <Style x:Key="Copyright" TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="assets/#KG Primary Italics"/>
+            <Setter Property="FontFamily" Value="{StaticResource KGPrimaryItalics}"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Foreground" Value="#AAA"/>
         </Style>
 
         <Style x:Key="TitleLabel" TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
+            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
             <Setter Property="FontSize" Value="36"/>
             <Setter Property="Foreground" Value="#247"/>
         </Style>
 
         <Style x:Key="Description" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontFamily" Value="assets/#KG Primary Italics"/>
+            <Setter Property="FontFamily" Value="{StaticResource KGPrimaryItalics}"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Foreground" Value="#247"/>
         </Style>
 
         <Style x:Key="HighlighterButton" TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
+            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
             <Setter Property="FontSize" Value="38"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="44"/>
             <Setter Property="Foreground" Value="#247"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <ImageBrush ImageSource="assets/ButtonEnabled.png" />
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="{StaticResource ButtonEnabled}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -48,33 +44,21 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="assets/ButtonFocused.png" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="Background" Value="{StaticResource ButtonFocused}"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Foreground" Value="#999"/>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="assets/ButtonDisabled.png" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="Background" Value="{StaticResource ButtonDisabled}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="BoardSizeButton" TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="assets/#Weatpoint"/>
+            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Width" Value="160"/>
             <Setter Property="Height" Value="160"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <ImageBrush ImageSource="assets/ButtonSizeNormal.png" />
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Background" Value="{StaticResource SizeButtonEnabled}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -86,11 +70,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="assets/ButtonSizeFocused.png" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="Background" Value="{StaticResource SizeButtonFocused}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -117,18 +97,18 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="assets/Background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="{StaticResource Background}" Stretch="UniformToFill" />
         </Grid.Background>
 
         <Grid HorizontalAlignment="Center" Width="760">
             <Grid.Background>
-                <ImageBrush ImageSource="assets/NotebookPaper.png" TileMode="FlipY" Viewport="0,0,760,1397" Stretch="UniformToFill" ViewportUnits="Absolute"/>
+                <ImageBrush ImageSource="{StaticResource NotebookPage}" TileMode="FlipY" Viewport="0,0,760,1397" Stretch="UniformToFill" ViewportUnits="Absolute"/>
             </Grid.Background>
 
-            <Image x:Name="GameLogo" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Top" Source="assets/Logo.png" Stretch="Fill" Width="600" Height="150"/>
+            <Image HorizontalAlignment="Center" Margin="108,14,108,0" VerticalAlignment="Top" Source="{StaticResource GameLogo}" Stretch="Fill" Width="544" Height="136"/>
             <Label Style="{StaticResource Copyright}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,6">© 2020 Dominik Mrajca</Label>
 
-            <Grid x:Name="MainMenu" Visibility="Hidden">
+            <Grid x:Name="MainMenu" Visibility="Visible">
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -171,7 +151,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize7x6.png" Margin="0,20,0,0" />
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="{StaticResource DotMesh7x6}" Margin="0,20,0,0" />
                             <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">7 x 6</Label>
                         </Grid>
                     </Button>
@@ -186,7 +166,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize8x7.png" Margin="0,20,0,0" />
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="{StaticResource DotMesh8x7}" Margin="0,20,0,0" />
                             <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">8 x 7</Label>
                         </Grid>
                     </Button>
@@ -201,7 +181,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="assets/BoardSize10x8.png" Margin="0,20,0,0" />
+                            <Image HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Source="{StaticResource DotMesh10x8}" Margin="0,20,0,0" />
                             <Label HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="28" Foreground="#247">10 x 8</Label>
                         </Grid>
                     </Button>
@@ -227,7 +207,7 @@
                 <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
             </Grid>
 
-            <Grid x:Name="GameBoardMenu" Visibility="Visible">
+            <Grid x:Name="GameBoardMenu" Visibility="Hidden">
                 <Grid VerticalAlignment="Center" Margin="106,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -247,7 +227,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Następny ruch:</Label>
-                        <Image x:Name="NextMoveColor" Grid.Column="1" Grid.Row="0" Source="assets/GridTexture1.png" Width="40" Height="40" VerticalAlignment="Center"/>
+                        <Image x:Name="NextMoveColor" Grid.Column="1" Grid.Row="0" Width="40" Height="40" VerticalAlignment="Center"/>
                     </Grid>
 
                     <Label Style="{StaticResource TitleLabel}" x:Name="WinnerAnnouncement" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Wygrywa gracz</Label>
