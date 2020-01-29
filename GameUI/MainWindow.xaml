@@ -6,95 +6,6 @@
         xmlns:local="clr-namespace:GameUI"
         mc:Ignorable="d"
         Title="Connect Four" Height="720" Width="1280" MinHeight="720" MinWidth="760">
-    <Window.Resources>
-        <Style x:Key="Copyright" TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="{StaticResource KGPrimaryItalics}"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Foreground" Value="#AAA"/>
-        </Style>
-
-        <Style x:Key="TitleLabel" TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
-            <Setter Property="FontSize" Value="36"/>
-            <Setter Property="Foreground" Value="#247"/>
-        </Style>
-
-        <Style x:Key="Description" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontFamily" Value="{StaticResource KGPrimaryItalics}"/>
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Foreground" Value="#247"/>
-        </Style>
-
-        <Style x:Key="HighlighterButton" TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
-            <Setter Property="FontSize" Value="38"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="Height" Value="44"/>
-            <Setter Property="Foreground" Value="#247"/>
-            <Setter Property="Background" Value="{StaticResource ButtonEnabled}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource ButtonFocused}"/>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="#999"/>
-                    <Setter Property="Background" Value="{StaticResource ButtonDisabled}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="BoardSizeButton" TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="{StaticResource Weatpoint}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="160"/>
-            <Setter Property="Height" Value="160"/>
-            <Setter Property="Background" Value="{StaticResource SizeButtonEnabled}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource SizeButtonFocused}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="GameBoardColumn" TargetType="{x:Type Button}">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Transparent"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource Background}" Stretch="UniformToFill" />
@@ -119,12 +30,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="ButtonResume" Style="{StaticResource HighlighterButton}" Click="Button_ResumeGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="0" IsEnabled="False">Wznów grę</Button>
-                    <Button x:Name="ButtonNewGame" Style="{StaticResource HighlighterButton}" Click="Button_NewGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">Nowa gra</Button>
-                    <Button x:Name="ButtonHowToPlay" Style="{StaticResource HighlighterButton}" Click="Button_HowToPlay" Grid.Column="0" Grid.Row="2">Zasady rozgrywki</Button>
+                    <Button x:Name="ButtonResume" Style="{StaticResource HighlighterButton}" Click="Button_ResumeGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="0" IsEnabled="False">Resume game</Button>
+                    <Button x:Name="ButtonNewGame" Style="{StaticResource HighlighterButton}" Click="Button_NewGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">New game</Button>
+                    <Button x:Name="ButtonHowToPlay" Style="{StaticResource HighlighterButton}" Click="Button_HowToPlay" Grid.Column="0" Grid.Row="2">How to play</Button>
                 </Grid>
 
-                <Button x:Name="ButtonQuit" Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_CloseGame">Wyjdź z gry</Button>
+                <Button x:Name="ButtonQuit" Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_CloseGame">Quit game</Button>
             </Grid>
 
             <Grid x:Name="StartingGameMenu" Visibility="Hidden">
@@ -139,7 +50,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center">Wybierz rozmiar planszy</Label>
+                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center">Choose the board size</Label>
 
                     <Button Style="{StaticResource BoardSizeButton}" Click="Button_StartGame7x6" Grid.Column="0" Grid.Row="1">
                         <Grid>
@@ -187,7 +98,7 @@
                     </Button>
                 </Grid>
 
-                <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
+                <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Return to menu</Button>
             </Grid>
 
             <Grid x:Name="HowToPlayMenu" Visibility="Hidden">
@@ -200,11 +111,11 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">Zasady rozgrywki</Label>
-                    <TextBlock Style="{StaticResource Description}" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="W Connect Four grają 2 osoby. Gracze po kolei wrzucają na spód kolumny krążek swojego koloru (czerwony lub niebieski), który wyląduje na szczycie stosu. Wygrywa gracz który pierwszy ułoży 4 krążki swojego koloru w jednej linii poziomo, pionowo, bądź na ukos." />
+                    <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">How to play</Label>
+                    <TextBlock Style="{StaticResource Description}" Grid.Column="0" Grid.Row="1" TextWrapping="Wrap" Text="Connect Four is is a 2 player game. Players take turns in adding coins of their color (red or blue) to different columns, stacking up from the bottom. The first player to place 4 or more coins of the same color horizontally, vertically or diagonally wins." />
                 </Grid>
 
-                <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
+                <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Return to menu</Button>
             </Grid>
 
             <Grid x:Name="GameBoardMenu" Visibility="Hidden">
@@ -226,15 +137,15 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Następny ruch:</Label>
+                        <Label Style="{StaticResource TitleLabel}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Current move:</Label>
                         <Image x:Name="NextMoveColor" Grid.Column="1" Grid.Row="0" Width="40" Height="40" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Label Style="{StaticResource TitleLabel}" x:Name="WinnerAnnouncement" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Wygrywa gracz</Label>
+                    <Label Style="{StaticResource TitleLabel}" x:Name="WinnerAnnouncement" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                     <Grid x:Name="GameBoardGrid" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Button Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Powrót do menu</Button>
+                <Button Style="{StaticResource HighlighterButton}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_ReturnToMenu">Return to menu</Button>
             </Grid>
         </Grid>
     </Grid>

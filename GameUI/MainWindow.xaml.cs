@@ -33,17 +33,19 @@ namespace GameUI
         }
 
         private ApplicationState state = ApplicationState.Unknown;
-        private Game game;
-        private ImageSource gridEmptyTexture    = new BitmapImage(new Uri(@"/assets/GridTexture0.png", UriKind.Relative));
-        private ImageSource gridBlueTexture      = new BitmapImage(new Uri(@"/assets/GridTexture1.png", UriKind.Relative));
-        private ImageSource gridRedTexture   = new BitmapImage(new Uri(@"/assets/GridTexture2.png", UriKind.Relative));
+        private Game game = new Game();
+        private ImageSource gridEmptyTexture, gridRedTexture, gridBlueTexture;
         private Image[,] gridImages;
+        private List<Button> columnButtons = new List<Button>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            this.game = new Game();
+            this.gridEmptyTexture   = (ImageSource)this.FindResource("GridTexture0");
+            this.gridRedTexture     = (ImageSource)this.FindResource("GridTexture1");
+            this.gridBlueTexture    = (ImageSource)this.FindResource("GridTexture2");
+            
             this.SetState(ApplicationState.InMainMenu);
         }
 
@@ -94,6 +96,7 @@ namespace GameUI
             int nbRows = layout.GetLength(1);
 
             this.gridImages = new Image[nbColumns, nbRows];
+            this.columnButtons.Clear();
 
             GameBoardGrid.Children.Clear();
             GameBoardGrid.ColumnDefinitions.Clear();
@@ -109,6 +112,7 @@ namespace GameUI
                 Grid.SetRow(button, 0);
                 Grid.SetColumn(button, col);
                 GameBoardGrid.Children.Add(button);
+                columnButtons.Add(button);
 
                 button.Name = "Button_AddCoin_" + col;
                 button.Click += Button_AddCoin;
@@ -154,6 +158,11 @@ namespace GameUI
             NextMoveContainer.Visibility = this.GetVisibility(!this.game.CurrentBoard.IsFinished);
             WinnerAnnouncement.Visibility = this.GetVisibility(this.game.CurrentBoard.IsFinished);
 
+            for (int col = 0; col < columnButtons.Count; col++)
+            {
+                columnButtons[col].IsEnabled = !this.game.CurrentBoard.IsFinished && unfilledColumns.Contains(col);
+            }
+
             if (!this.game.CurrentBoard.IsFinished)
             {
                 switch (this.game.CurrentBoard.NextPlayer)
@@ -176,17 +185,17 @@ namespace GameUI
                 {
                     case 1:
                         {
-                            WinnerAnnouncement.Content = "Wygrywa gracz " + "CZERWONY" + "!";
+                            WinnerAnnouncement.Content = "Player " + "RED" + " wins!";
                             break;
                         }
                     case 2:
                         {
-                            WinnerAnnouncement.Content = "Wygrywa gracz " + "NIEBIESKI" + "!";
+                            WinnerAnnouncement.Content = "Player " + "BLUE" + " wins!";
                             break;
                         }
                     default:
                         {
-                            WinnerAnnouncement.Content = "Gra zakończyła się remisem...";
+                            WinnerAnnouncement.Content = "Game resulted in a draw...";
                             break;
                         }
                 }
@@ -220,92 +229,6 @@ namespace GameUI
             }
         }
         
-        /*
-        private void DrawBoard()
-        {
-            BoardFrame.Children.Clear();
-
-            int[,] layout = this.game.CurrentBoard.Layout;
-            int[] unfilledColumns = this.game.CurrentBoard.ColumnsWithEmptyRows;
-            int nbColumns = layout.GetLength(0);
-            int nbRows = layout.GetLength(1);
-            
-            int displayedPlayer = this.game.CurrentBoard.Winner > 0 ? this.game.CurrentBoard.Winner : this.game.CurrentBoard.NextPlayer;
-            string displayedPlayerName = displayedPlayer == 1 ? "CZERWONY" : "ŻÓŁTY";
-            
-            if (!this.game.CurrentBoard.HasEmptyColumns)
-            {
-                GameStatusText.Content = "Koniec gry - brak wolnych pól!";
-            }
-            else if (this.game.CurrentBoard.Winner > 0)
-            {
-                GameStatusText.Content = "Gracz " + displayedPlayerName + " wygrywa grę!";
-            }
-            else
-            {
-                GameStatusText.Content = "Następny ruch: " + displayedPlayerName;
-            }
-            
-            Thickness newMargin = BoardFrame.Margin;
-            newMargin.Left = (1280 - nbColumns * GRID_SIZE) / 2;
-            BoardFrame.Margin = newMargin;
-
-            for (int col = 0; col < nbColumns; col++)
-            {
-                Grid columnGrid = new Grid();
-                BoardFrame.Children.Add(columnGrid);
-
-                columnGrid.Margin = new Thickness(col * GRID_SIZE, 0, 0, 0);
-                
-                for (int row = 0; row < nbRows; row++)
-                {
-                    Image rowGridImage = new Image();
-                    columnGrid.Children.Add(rowGridImage);
-                    
-                    switch (layout[col, row])
-                    {
-                        case 1:
-                            {
-                                rowGridImage.Source = gridRedTexture;
-                                break;
-                            }
-                        case 2:
-                            {
-                                rowGridImage.Source = gridBlueTexture;
-                                break;
-                            }
-                        default:
-                            {
-                                rowGridImage.Source = gridEmptyTexture;
-                                break;
-                            }
-                    }
-
-                    rowGridImage.Margin = new Thickness(0, 0, 0, row * GRID_SIZE);
-                    rowGridImage.Width = rowGridImage.Height = GRID_SIZE;
-                    rowGridImage.HorizontalAlignment = HorizontalAlignment.Left;
-                    rowGridImage.VerticalAlignment = VerticalAlignment.Bottom;
-                }
-
-                if (!this.game.CurrentBoard.IsFinished && unfilledColumns.Contains(col))
-                {
-                    Button addCoinButton = new Button();
-                    columnGrid.Children.Add(addCoinButton);
-
-                    addCoinButton.Margin = new Thickness(10, 0, 0, nbRows * GRID_SIZE + 10);
-                    addCoinButton.Width = addCoinButton.Height = GRID_SIZE - 20;
-                    addCoinButton.HorizontalAlignment = HorizontalAlignment.Left;
-                    addCoinButton.VerticalAlignment = VerticalAlignment.Bottom;
-                    addCoinButton.Name = "AddCoinButton_" + col;
-                    addCoinButton.Content = "⯆";
-                    addCoinButton.FontSize = 20;
-
-                    addCoinButton.Click += ButtonAddCoin_Click;
-                }
-            }
-        }
-        */
-
         private void Button_ResumeGame(object sender, RoutedEventArgs e)
         {
             if (this.game.CurrentBoard == null)
@@ -350,9 +273,9 @@ namespace GameUI
         {
             Button button = (Button)sender;
 
-            string[] explode = button.Name.Split('_');
-            if (explode.Length != 3) return;
-            int col = Int32.Parse(explode[2]);
+            if (!columnButtons.Contains(button)) return;
+            
+            int col = columnButtons.IndexOf(button);
 
             if (!this.game.CurrentBoard.ColumnsWithEmptyRows.Contains(col)) return;
 
