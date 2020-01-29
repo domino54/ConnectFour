@@ -23,17 +23,65 @@ namespace GameUI
     {
         enum ApplicationState
         {
+            /// <summary>
+            /// Unknown state.
+            /// </summary>
             Unknown,
+
+            /// <summary>
+            /// In the application main menu.
+            /// </summary>
             InMainMenu,
+
+            /// <summary>
+            /// Reading the rules of the game.
+            /// </summary>
             InHelpMenu,
+
+            /// <summary>
+            /// Choosing the board size for a new game.
+            /// </summary>
             StartingGame,
+
+            /// <summary>
+            /// Playing the game.
+            /// </summary>
             Playing
         }
 
+        /// <summary>
+        /// Current state of the application.
+        /// </summary>
         private ApplicationState State = ApplicationState.Unknown;
+
+        /// <summary>
+        /// Game logic handler.
+        /// </summary>
         private GameLogic Game = new GameLogic();
-        private ImageSource GridEmptyTexture, GridBlueTexture, GridRedTexture;
+
+        /// <summary>
+        /// Board grid texture for fields not marked by any players.
+        /// </summary>
+        private ImageSource GridEmptyTexture;
+
+        /// <summary>
+        /// Board grid texture for fields marked by the first player.
+        /// </summary>
+        private ImageSource GridBlueTexture;
+
+        /// <summary>
+        /// Board grid texture for fields marked by the second player.
+        /// </summary>
+        private ImageSource GridRedTexture;
+
+        /// <summary>
+        /// Two dimensional array of image objects used to visualize the current state of the game.
+        /// </summary>
         private Image[,] GridImages;
+
+        /// <summary>
+        /// List of column buttons used by players to add coins.
+        /// </summary>
         private List<Button> ColumnButtons = new List<Button>();
 
         public MainWindow()
@@ -47,11 +95,20 @@ namespace GameUI
             this.SetState(ApplicationState.InMainMenu);
         }
 
+        /// <summary>
+        /// Converts a boolean value into visibility property.
+        /// </summary>
+        /// <param name="visible">Target visibility.</param>
+        /// <returns>Visibility value.</returns>
         private Visibility GetVisibility(bool visible)
         {
             return visible ? Visibility.Visible : Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Sets the state of the menu.
+        /// </summary>
+        /// <param name="newState">New menu state.</param>
         private void SetState(ApplicationState newState)
         {
             if (this.State == newState) return;
@@ -65,6 +122,10 @@ namespace GameUI
             ButtonResume.IsEnabled      = this.Game.CurrentBoard != null;
         }
 
+        /// <summary>
+        /// Displays a message containing exception message.
+        /// </summary>
+        /// <param name="exception">The exception to handle.</param>
         private void ShowException(Exception exception)
         {
             if (exception == null) return;
@@ -73,6 +134,10 @@ namespace GameUI
             ExceptionBody.Text = $"An exception has been caught:\n{exception.Message}\nPlease contact the authors if this problem persists.";
         }
 
+        /// <summary>
+        /// Starts a new game.
+        /// </summary>
+        /// <param name="size">Size of the board for the new game.</param>
         private void StartNewGame(GameLogic.AllowedBoardSizes size)
         {
             try
@@ -95,6 +160,9 @@ namespace GameUI
             }
         }
 
+        /// <summary>
+        /// Initializes the game board elements.
+        /// </summary>
         private void InitGameBoard()
         {
             int[,] layout = this.Game.CurrentBoard.Layout;
@@ -146,6 +214,9 @@ namespace GameUI
             this.DrawBoard();
         }
 
+        /// <summary>
+        /// Updates the current visual state of the game board.
+        /// </summary>
         private void DrawBoard()
         {
             int nbColumns = this.GridImages.GetLength(0);
@@ -228,6 +299,9 @@ namespace GameUI
             }
         }
         
+        /// <summary>
+        /// Fired when button resuming the current game is clicked.
+        /// </summary>
         private void Button_ResumeGame(object sender, RoutedEventArgs e)
         {
             if (this.Game.CurrentBoard == null)
@@ -238,36 +312,57 @@ namespace GameUI
             this.SetState(ApplicationState.Playing);
         }
 
+        /// <summary>
+        /// Fired when button opening the new game menu is clicked.
+        /// </summary>
         private void Button_NewGame(object sender, RoutedEventArgs e)
         {
             this.SetState(ApplicationState.StartingGame);
         }
-        
+
+        /// <summary>
+        /// Fired when button showing the game rules is clicked.
+        /// </summary>
         private void Button_HowToPlay(object sender, RoutedEventArgs e)
         {
             this.SetState(ApplicationState.InHelpMenu);
         }
 
+        /// <summary>
+        /// Fired when button closing the game window is clicked.
+        /// </summary>
         private void Button_CloseGame(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        
+
+        /// <summary>
+        /// Fired when button starting a new game on 7x6 board is clicked.
+        /// </summary>
         private void Button_StartGame7x6(object sender, RoutedEventArgs e)
         {
             StartNewGame(GameLogic.AllowedBoardSizes.Size7x6);
         }
 
+        /// <summary>
+        /// Fired when button starting a new game on 8x7 board is clicked.
+        /// </summary>
         private void Button_StartGame8x7(object sender, RoutedEventArgs e)
         {
             StartNewGame(GameLogic.AllowedBoardSizes.Size8x7);
         }
 
+        /// <summary>
+        /// Fired when button starting a new game on 10x8 board is clicked.
+        /// </summary>
         private void Button_StartGame10x8(object sender, RoutedEventArgs e)
         {
             StartNewGame(GameLogic.AllowedBoardSizes.Size10x8);
         }
 
+        /// <summary>
+        /// Fired when button adding new coin to a column is clicked.
+        /// </summary>
         private void Button_AddCoin(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -292,6 +387,9 @@ namespace GameUI
             }
         }
 
+        /// <summary>
+        /// Fired when button returning to the main menu is clicked.
+        /// </summary>
         private void Button_ReturnToMenu(object sender, RoutedEventArgs e)
         {
             if (this.Game.CurrentBoard != null && this.Game.CurrentBoard.IsFinished)
@@ -301,7 +399,10 @@ namespace GameUI
 
             this.SetState(ApplicationState.InMainMenu);
         }
-        
+
+        /// <summary>
+        /// Fired when button closing the exception message is clicked.
+        /// </summary>
         private void Button_CloseException(object sender, RoutedEventArgs e)
         {
             ExceptionViewer.Visibility = Visibility.Visible;

@@ -5,7 +5,7 @@ namespace GameLibrary
     /// <summary>
     /// Represents a coin filling an empty cell in the Board grid.
     /// </summary>
-    class BoardCoin
+    public class BoardCoin
     {
         /// <summary>
         /// Identifier of the player who the coin belongs to.

@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>GameLibrary.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,12 +54,13 @@
     <None Include=".gitignore" />
     <None Include="api\.gitignore" />
     <None Include="api\index.md" />
-    <None Include="articles\intro.md" />
-    <None Include="articles\toc.md" />
     <None Include="docfx.json" />
     <None Include="index.md" />
     <None Include="packages.config" />
     <None Include="toc.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GameLibrary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\docfx.console.2.48.1\build\docfx.console.targets" Condition="Exists('..\packages\docfx.console.2.48.1\build\docfx.console.targets')" />

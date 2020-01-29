@@ -6,10 +6,10 @@ namespace GameLibrary
     /// <summary>
     /// Represents a single column of coins in the Board.
     /// </summary>
-    class BoardColumn
+    public class BoardColumn
     {
         /// <summary>
-        /// 
+        /// Coins added to the column.
         /// </summary>
         private List<BoardCoin> FilledRows = new List<BoardCoin>();
 

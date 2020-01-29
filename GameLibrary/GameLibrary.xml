@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:GameLibrary.Board">
+            <summary>
+            Represents a board, on which the game of Connect Four is played.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Board.Columns">
+            <summary>
+            Collection of columns which the board is made of.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Board.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new Board with given number of columns and rows.
+            </summary>
+            <param name="nbColumns">Number of columns in that Board.</param>
+            <param name="nbRows">Number of rows in that Board.</param>
+        </member>
+        <member name="M:GameLibrary.Board.MatchingPattern(System.Int32[])">
+            <summary>
+            Checks if in the given arrangement of coins there is a sequence
+            of 4 or more coins belonging to the same player.
+            </summary>
+            <param name="coinsArrangement">The arrangement of coins. Must consist of at least 4 elements.</param>
+            <returns>Identifier of the player that formed a sequence. 0 if no player formed a sequence.</returns>
+        </member>
+        <member name="M:GameLibrary.Board.FindWinner">
+            <summary>
+            Get the identifier of player that matches the game's win conditions.
+            </summary>
+            <returns>Identifier of the winning player. 0 if there's no winner.</returns>
+        </member>
+        <member name="M:GameLibrary.Board.AddCoinToColumn(System.Int32,System.Int32)">
+            <summary>
+            Add a coin on top of the stack in a column in the Board.
+            </summary>
+            <param name="columnNum">Number of column to add a coin to.</param>
+            <param name="playerNum">Player who added a coin.</param>
+        </member>
+        <member name="P:GameLibrary.Board.NbColumns">
+            <summary>
+            Number of columns in the Board.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.NbRows">
+            <summary>
+            Number of rows in the Board.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.NextPlayerNum">
+            <summary>
+            Identifier of the player who should be next to add a new coin.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.WinnerNum">
+            <summary>
+            Identifier of the player who won the game. 0 if there is no winner.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.ColumnsWithUnfilledRows">
+            <summary>
+            Array of indexes of columns which have not been filled with coins yet.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.HasUnfilledColumns">
+            <summary>
+            Whether there still are any columns with empty rows or not.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.IsFinished">
+            <summary>
+            Whether the game is finished or not.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Board.Layout">
+            <summary>
+            Two dimensional array representing the Board layout, where values are
+            identifiers of players, who placed their coin in the given cell.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.BoardCoin">
+            <summary>
+            Represents a coin filling an empty cell in the Board grid.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.BoardCoin.PlayerNum">
+            <summary>
+            Identifier of the player who the coin belongs to.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.BoardCoin.#ctor(System.Int32)">
+            <summary>
+            Creates a new BoardCoin object.
+            </summary>
+            <param name="playerNum">Identifier of the player who the coin belongs to.</param>
+        </member>
+        <member name="T:GameLibrary.BoardColumn">
+            <summary>
+            Represents a single column of coins in the Board.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.BoardColumn.FilledRows">
+            <summary>
+            Coins added to the column.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.BoardColumn.NbRows">
+            <summary>
+            Number of rows in the column.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.BoardColumn.#ctor(System.Int32)">
+            <summary>
+            Creates a new column.
+            </summary>
+            <param name="nbRows">Number of rows in that column.</param>
+        </member>
+        <member name="P:GameLibrary.BoardColumn.HasEmptyRows">
+            <summary>
+            Whether the column still has some empty rows or not.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.BoardColumn.AddCoin(System.Int32)">
+            <summary>
+            Add a coin to the column.
+            </summary>
+            <param name="playerNum">Identifier of the player who added the coin.</param>
+        </member>
+        <member name="P:GameLibrary.BoardColumn.Layout">
+            <summary>
+            Array representing the Board layout, where values are identifiers
+            of players, who placed their coin in the given row.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.GameLogic">
+            <summary>
+            Main handler of the game's logic.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.GameLogic.AllowedBoardSizes">
+            <summary>
+            Allowed sized of the game board.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.GameLogic.AllowedBoardSizes.Size7x6">
+            <summary>
+            7 by 6 grid.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.GameLogic.AllowedBoardSizes.Size8x7">
+            <summary>
+            8 by 7 grid.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.GameLogic.AllowedBoardSizes.Size10x8">
+            <summary>
+            10 by 8 grid.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.GameLogic.CurrentBoard">
+            <summary>
+            Board on which the game is currently played on.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.GameLogic.StartNewGame(GameLibrary.GameLogic.AllowedBoardSizes)">
+            <summary>
+            Start a new game if there isn't one running already.
+            </summary>
+            <param name="boardSize">Size of the Board the game will be played at.</param>
+        </member>
+        <member name="M:GameLibrary.GameLogic.StopGame">
+            <summary>
+            Stop the currently running game.
+            </summary>
+        </member>
+    </members>
+</doc>

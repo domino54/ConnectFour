@@ -7,10 +7,24 @@ namespace GameLibrary
     /// </summary>
     public class GameLogic
     {
+        /// <summary>
+        /// Allowed sized of the game board.
+        /// </summary>
         public enum AllowedBoardSizes
         {
+            /// <summary>
+            /// 7 by 6 grid.
+            /// </summary>
             Size7x6,
+
+            /// <summary>
+            /// 8 by 7 grid.
+            /// </summary>
             Size8x7,
+
+            /// <summary>
+            /// 10 by 8 grid.
+            /// </summary>
             Size10x8
         }
 
