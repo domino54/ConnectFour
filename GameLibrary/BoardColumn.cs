@@ -1,65 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLibrary
 {
+    /// <summary>
+    /// Represents a single column of coins in the Board.
+    /// </summary>
     class BoardColumn
     {
-        private List<BoardCoin> filledRows = new List<BoardCoin>();
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<BoardCoin> FilledRows = new List<BoardCoin>();
+
+        /// <summary>
+        /// Number of rows in the column.
+        /// </summary>
         public int NbRows { get; }
 
-        public BoardColumn(int rows)
+        /// <summary>
+        /// Creates a new column.
+        /// </summary>
+        /// <param name="nbRows">Number of rows in that column.</param>
+        public BoardColumn(int nbRows)
         {
-            if (rows <= 0)
+            if (nbRows <= 0)
             {
                 throw new Exception();
             }
             
-            this.NbRows = rows;
-        }
-        
-        public bool HasEmptyRows
-        {
-            get => this.filledRows.Count < this.NbRows;
+            this.NbRows = nbRows;
         }
 
-        public void AddCoin(int player)
+        /// <summary>
+        /// Whether the column still has some empty rows or not.
+        /// </summary>
+        public bool HasEmptyRows
+        {
+            get => this.FilledRows.Count < this.NbRows;
+        }
+
+        /// <summary>
+        /// Add a coin to the column.
+        /// </summary>
+        /// <param name="playerNum">Identifier of the player who added the coin.</param>
+        public void AddCoin(int playerNum)
         {
             if (!this.HasEmptyRows)
             {
                 throw new Exception();
             }
-
-            if (player <= 0)
-            {
-                throw new Exception();
-            }
-
-            BoardCoin coin = new BoardCoin(player);
-
-            this.filledRows.Add(coin);
+            
+            this.FilledRows.Add(new BoardCoin(playerNum));
         }
-        
+
+        /// <summary>
+        /// Array representing the Board layout, where values are identifiers
+        /// of players, who placed their coin in the given row.
+        /// </summary>
         public int[] Layout
         {
             get {
-                int[] rowsPlayers = new int[this.NbRows];
+                int[] layout = new int[this.NbRows];
 
                 for (int i = 0; i < this.NbRows; i++)
                 {
-                    if (i < this.filledRows.Count) {
-                        rowsPlayers[i] = this.filledRows[i].Player;
+                    if (i < this.FilledRows.Count) {
+                        layout[i] = this.FilledRows[i].PlayerNum;
                     }
                     else
                     {
-                        rowsPlayers[i] = 0;
+                        layout[i] = 0;
                     }
                 }
 
-                return rowsPlayers;
+                return layout;
             }
         }
     }

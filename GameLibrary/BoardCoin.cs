@@ -1,23 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLibrary
 {
+    /// <summary>
+    /// Represents a coin filling an empty cell in the Board grid.
+    /// </summary>
     class BoardCoin
     {
-        public int Player { get; }
+        /// <summary>
+        /// Identifier of the player who the coin belongs to.
+        /// </summary>
+        public int PlayerNum { get; }
 
-        public BoardCoin(int player)
+        /// <summary>
+        /// Creates a new BoardCoin object.
+        /// </summary>
+        /// <param name="playerNum">Identifier of the player who the coin belongs to.</param>
+        public BoardCoin(int playerNum)
         {
-            if (player <= 0)
+            if (playerNum <= 0 || playerNum > 2)
             {
                 throw new Exception();
             }
 
-            this.Player = player;
+            this.PlayerNum = playerNum;
         }
     }
 }
