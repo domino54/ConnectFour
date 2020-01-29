@@ -11,6 +11,23 @@
             <ImageBrush ImageSource="{StaticResource Background}" Stretch="UniformToFill" />
         </Grid.Background>
 
+        <Grid x:Name="ExceptionViewer" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Panel.ZIndex="1" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="{StaticResource SystemBackground}" Stretch="UniformToFill" />
+            </Grid.Background>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="ExceptionBody" Style="{StaticResource Description}" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" Margin="10" Foreground="#C00"></TextBlock>
+            <Button Style="{StaticResource HighlighterButton}" Click="Button_CloseException" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1" Foreground="#FFF">OK</Button>
+        </Grid>
+
         <Grid HorizontalAlignment="Center" Width="760">
             <Grid.Background>
                 <ImageBrush ImageSource="{StaticResource NotebookPage}" TileMode="FlipY" Viewport="0,0,760,1397" Stretch="UniformToFill" ViewportUnits="Absolute"/>
@@ -31,11 +48,11 @@
                     </Grid.RowDefinitions>
 
                     <Button x:Name="ButtonResume" Style="{StaticResource HighlighterButton}" Click="Button_ResumeGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="0" IsEnabled="False">Resume game</Button>
-                    <Button x:Name="ButtonNewGame" Style="{StaticResource HighlighterButton}" Click="Button_NewGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">New game</Button>
-                    <Button x:Name="ButtonHowToPlay" Style="{StaticResource HighlighterButton}" Click="Button_HowToPlay" Grid.Column="0" Grid.Row="2">How to play</Button>
+                    <Button Style="{StaticResource HighlighterButton}" Click="Button_NewGame" Margin="0,0,0,8" Grid.Column="0" Grid.Row="1">New game</Button>
+                    <Button Style="{StaticResource HighlighterButton}" Click="Button_HowToPlay" Grid.Column="0" Grid.Row="2">How to play</Button>
                 </Grid>
 
-                <Button x:Name="ButtonQuit" Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_CloseGame">Quit game</Button>
+                <Button Style="{StaticResource HighlighterButton}" VerticalAlignment="Bottom" Margin="0,0,0,37" Click="Button_CloseGame">Quit game</Button>
             </Grid>
 
             <Grid x:Name="StartingGameMenu" Visibility="Hidden">

@@ -44,7 +44,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardCoin.cs" />
     <Compile Include="BoardColumn.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="GameLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

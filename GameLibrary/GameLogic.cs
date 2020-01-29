@@ -27,7 +27,7 @@ namespace GameLibrary
         {
             if (this.CurrentBoard != null)
             {
-                throw new Exception();
+                throw new Exception("Trying to start a new game while there already is one active.");
             }
 
             int nbColumns = 0, nbRows = 0;
@@ -64,7 +64,7 @@ namespace GameLibrary
         {
             if (this.CurrentBoard == null)
             {
-                throw new Exception();
+                throw new Exception("Trying to stop the game while there is no game running.");
             }
 
             this.CurrentBoard = null;

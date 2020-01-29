@@ -23,18 +23,18 @@ namespace GameLibrary
         {
             if (nbColumns <= 0)
             {
-                throw new Exception();
+                throw new Exception($"Specified number of columns invalid: must be greater than 0 ({nbColumns} given).");
             }
             
             if (nbRows <= 0)
             {
-                throw new Exception();
+                throw new Exception($"Specified number of rows invalid: must be greater than 0 ({nbRows} given).");
             }
 
             this.NbColumns      = nbColumns;
             this.NbRows         = nbRows;
-            this.NextPlayerNum     = 1;
-            this.WinnerNum         = 0;
+            this.NextPlayerNum  = 1;
+            this.WinnerNum      = 0;
 
             for (int i = 0; i < this.NbColumns; i++)
             {
@@ -52,7 +52,7 @@ namespace GameLibrary
         {
             if (coinsArrangement.Length < 4)
             {
-                throw new Exception();
+                throw new Exception($"Given arrangement of coins is too short: expected at least 4 elements ({coinsArrangement.Length} given).");
             }
 
             int currentStreakIndex = 0;
@@ -153,7 +153,7 @@ namespace GameLibrary
         {
             if (Columns.ElementAt(columnNum) == null)
             {
-                throw new Exception();
+                throw new Exception($"Column at given index ({columnNum}) does not exist.");
             }
 
             BoardColumn column = Columns[columnNum];

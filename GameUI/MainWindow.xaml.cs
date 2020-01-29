@@ -65,6 +65,14 @@ namespace GameUI
             ButtonResume.IsEnabled      = this.Game.CurrentBoard != null;
         }
 
+        private void ShowException(Exception exception)
+        {
+            if (exception == null) return;
+
+            ExceptionViewer.Visibility = Visibility.Visible;
+            ExceptionBody.Text = $"An exception has been caught:\n{exception.Message}\nPlease contact the authors if this problem persists.";
+        }
+
         private void StartNewGame(GameLogic.AllowedBoardSizes size)
         {
             try
@@ -292,6 +300,11 @@ namespace GameUI
             }
 
             this.SetState(ApplicationState.InMainMenu);
+        }
+        
+        private void Button_CloseException(object sender, RoutedEventArgs e)
+        {
+            ExceptionViewer.Visibility = Visibility.Visible;
         }
     }
 }

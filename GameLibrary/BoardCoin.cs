@@ -20,7 +20,7 @@ namespace GameLibrary
         {
             if (playerNum <= 0 || playerNum > 2)
             {
-                throw new Exception();
+                throw new Exception($"Invalid player identifier: must be between 1 and 2 ({playerNum} given).");
             }
 
             this.PlayerNum = playerNum;

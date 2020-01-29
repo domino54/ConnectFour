@@ -26,7 +26,7 @@ namespace GameLibrary
         {
             if (nbRows <= 0)
             {
-                throw new Exception();
+                throw new Exception($"Specified number of rows invalid: must be greater than 0 ({nbRows} given).");
             }
             
             this.NbRows = nbRows;
@@ -48,7 +48,7 @@ namespace GameLibrary
         {
             if (!this.HasEmptyRows)
             {
-                throw new Exception();
+                throw new Exception("Cannot add more coins to the column - it is full.");
             }
             
             this.FilledRows.Add(new BoardCoin(playerNum));

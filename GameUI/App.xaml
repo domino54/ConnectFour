@@ -9,6 +9,7 @@
             <FontFamily x:Key="KGPrimaryItalics">pack://application:,,,/assets/#KG Primary Italics</FontFamily>
             <ImageSource x:Key="GameLogo">pack://application:,,,/assets/Logo.png</ImageSource>
             <ImageSource x:Key="Background">pack://application:,,,/assets/Background.jpg</ImageSource>
+            <ImageSource x:Key="SystemBackground">pack://application:,,,/assets/SystemBackground.png</ImageSource>
             <ImageSource x:Key="NotebookPage">pack://application:,,,/assets/NotebookPaper.png</ImageSource>
             <ImageSource x:Key="DotMesh7x6">pack://application:,,,/assets/BoardSize7x6.png</ImageSource>
             <ImageSource x:Key="DotMesh8x7">pack://application:,,,/assets/BoardSize8x7.png</ImageSource>
