@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameUI", "GameUI\GameUI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary.UnitTests", "GameLibrary.UnitTests\GameLibrary.UnitTests.csproj", "{8A1584C4-7726-4BAF-96CC-E44C127E82E4}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{60ED45D4-4F2A-4582-9F42-A33C8EB160DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{8A1584C4-7726-4BAF-96CC-E44C127E82E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1584C4-7726-4BAF-96CC-E44C127E82E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A1584C4-7726-4BAF-96CC-E44C127E82E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60ED45D4-4F2A-4582-9F42-A33C8EB160DE}.Debug|Any CPU.ActiveCfg = Debug
+		{60ED45D4-4F2A-4582-9F42-A33C8EB160DE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
